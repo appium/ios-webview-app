@@ -1,10 +1,10 @@
 {
   "name": "ios-webview-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "iOS WebView app for testing appium",
   "main": "apps.json",
   "scripts": {
-    "install": "grunt default"
+    "install": "node -e \"require('grunt').tasks(['default']);\""
   },
   "repository": {
     "type": "git",
