@@ -1,6 +1,6 @@
 {
   "name": "ios-webview-app",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "iOS WebView app for testing appium",
   "main": "apps.json",
   "scripts": {
