@@ -1,12 +1,10 @@
 var xcode = require('appium-xcode');
-var sdks = ['iphonesimulator', 'iphoneos'];
 var appPaths = require('./');
 var Q = require('q');
 var fs = require('fs');
 var renameFile = Q.denodeify(fs.rename);
 
 module.exports = function(grunt) {
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
   });
@@ -71,6 +69,14 @@ module.exports = function(grunt) {
     });
   }
 
+  var getSdks = function () {
+    var sdks = ['iphonesimulator'];
+    if (process.env.IOS_REAL_DEVICE || process.env.REAL_DEVICE) {
+      sdks.push('iphoneos');
+    }
+    return sdks;
+  }
+
 
   grunt.registerTask('build', 'build ios app', function(sdk) { buildApp('.', sdk, this.async()) } );
   grunt.registerTask('clean', 'cleaning', function(sdk) { cleanApp('.', sdk, this.async()) } );
@@ -78,8 +84,7 @@ module.exports = function(grunt) {
   grunt.registerTask('cleanAll', 'cleaning', function() {
     var done = this.async();
     xcode.getMaxIOSSDK().then(function(sdkVer) {
-
-      sdks.forEach(function (sdk) {
+      getSdks().forEach(function (sdk) {
         sdk = sdk+sdkVer;
         grunt.task.run('clean:'+sdk);
       });
@@ -90,8 +95,7 @@ module.exports = function(grunt) {
   grunt.registerTask('buildAll', 'building', function() {
     var done = this.async();
     xcode.getMaxIOSSDK().then(function(sdkVer) {
-
-      sdks.forEach(function (sdk) {
+      getSdks().forEach(function (sdk) {
         sdk = sdk+sdkVer;
         grunt.task.run('build:'+sdk);
       });
