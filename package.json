@@ -3,6 +3,7 @@
   "version": "1.0.3",
   "description": "iOS WebView app for testing appium",
   "main": "apps.json",
+  "license": "Apache-2.0",
   "scripts": {
     "install": "node -e \"require('grunt').tasks(['default']);\""
   },
